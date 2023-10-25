@@ -124,7 +124,6 @@ const renameGroup = asyncHandler(async (req, res) => {
   } else res.json(updateChat);
 });
 
-
 // SAME COPY OF A USER IS PRESENT CURRENTLY IN GROUP -- HANDLE THIS !!
 const addToGroup = asyncHandler(async (req, res) => {
   const { chatId, userId } = req.body;
@@ -162,10 +161,14 @@ const removeFromGroup = asyncHandler(async (req, res) => {
     .populate("users", "-password")
     .populate("groupAdmin", "-password");
 
+  console.log(removed);
+
   if (!removed) {
     res.status(400);
     throw new Error(error.message);
-  } else res.json(removed);
+  } 
+  
+  else res.json(removed);
 });
 
 module.exports = {
